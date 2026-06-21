@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "\"${PLUGIN_ROOT}/scripts/run-hook.sh\"" }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          { "type": "command", "command": "\"${PLUGIN_ROOT}/scripts/run-hook.sh\"" }
+        ]
+      }
+    ]
+  }
+}

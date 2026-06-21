@@ -1,0 +1,36 @@
+{
+  "name": "agent-clock",
+  "version": "1.0.0",
+  "description": "Injects the real current date and time into the agent's context on every prompt and at session start, so it never reasons from a stale session timestamp.",
+  "author": {
+    "name": "Arthur Katcher",
+    "email": "192321283+arthurkatcher@users.noreply.github.com",
+    "url": "https://github.com/arthurkatcher"
+  },
+  "homepage": "https://github.com/arthurkatcher/agent-clock",
+  "repository": "https://github.com/arthurkatcher/agent-clock",
+  "keywords": [
+    "hooks",
+    "datetime",
+    "timestamp",
+    "clock",
+    "context-injection",
+    "time-awareness",
+    "claude-code",
+    "codex",
+    "agent",
+    "developer-tools"
+  ],
+  "hooks": "./hooks/hooks-codex.json",
+  "interface": {
+    "displayName": "Agent Clock",
+    "shortDescription": "Keeps your coding agent aware of the real current date and time.",
+    "longDescription": "Injects a fresh real-world timestamp into the agent's context on every user prompt and at session start, so it never answers from a clock frozen when the session began.",
+    "developerName": "Arthur Katcher",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read"
+    ],
+    "brandColor": "#111111"
+  }
+}

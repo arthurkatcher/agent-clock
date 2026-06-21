@@ -1,0 +1,25 @@
+{
+  "name": "agent-clock",
+  "owner": {
+    "name": "Arthur Katcher",
+    "email": "192321283+arthurkatcher@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "Give your coding agent an accurate clock — inject the real current date/time into context on every prompt. Installable on Claude Code and Codex.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "agent-clock",
+      "description": "Injects the real current date and time into the agent's context on every prompt and at session start, so it never reasons from a stale session timestamp.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Arthur Katcher",
+        "email": "192321283+arthurkatcher@users.noreply.github.com"
+      },
+      "category": "developer-tools",
+      "source": "./plugins/agent-clock",
+      "homepage": "https://github.com/arthurkatcher/agent-clock"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "agent-clock",
+  "interface": {
+    "displayName": "Agent Clock"
+  },
+  "plugins": [
+    {
+      "name": "agent-clock",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-clock"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
