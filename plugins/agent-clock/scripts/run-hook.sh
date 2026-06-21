@@ -9,8 +9,14 @@
 #
 # Contract:
 #   - Reads the hook event JSON on stdin (may be empty on some events).
-#   - Prints a hookSpecificOutput JSON object on stdout and exits 0.
-#   - On exit 0, stdout is injected as context the model can see and act on.
+#   - Emits the current time as context on stdout and exits 0.
+#   - Output form depends on the event, because the two harnesses differ:
+#       * UserPromptSubmit -> PLAIN TEXT on stdout. Claude Code does NOT honor
+#         hookSpecificOutput.additionalContext for this event (it only injects
+#         plain stdout); Codex also accepts plain stdout here. Using JSON would
+#         silently drop the per-turn timestamp on Claude Code.
+#       * SessionStart (and other context events) -> hookSpecificOutput JSON,
+#         which both Claude Code and Codex honor.
 #
 # Optional config:
 #   AGENT_CLOCK_TZ   Override the timezone (e.g. "Europe/Belgrade", "UTC").
@@ -40,7 +46,14 @@ epoch="$(date '+%s')"
 
 context="Current real-world date and time, refreshed this turn: ${now_local} (UTC ${now_utc}, Unix ${epoch}). Treat this as the authoritative present moment; do not infer the current date or time of day from earlier messages or from model training data."
 
-# Emit the context-injection decision. The date fields contain no JSON-special
-# characters, so a direct printf is safe here.
-printf '{"hookSpecificOutput":{"hookEventName":"%s","additionalContext":"%s"}}\n' \
-  "$event" "$context"
+# Emit the context using the form the firing event honors on BOTH harnesses.
+# The date fields contain no JSON-special characters, so a direct printf is safe.
+if [ "$event" = "UserPromptSubmit" ]; then
+  # Plain stdout: Claude Code injects it as context (it ignores additionalContext
+  # for UserPromptSubmit), and Codex adds plain stdout as developer context too.
+  printf '%s\n' "$context"
+else
+  # SessionStart and other context events: additionalContext JSON works on both.
+  printf '{"hookSpecificOutput":{"hookEventName":"%s","additionalContext":"%s"}}\n' \
+    "$event" "$context"
+fi
