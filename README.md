@@ -11,6 +11,8 @@ from a timestamp frozen when the session began.
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Hooks](https://img.shields.io/badge/mechanism-UserPromptSubmit_%2B_SessionStart-blue)](#how-it-works)
 
+![agent-clock demo — the hook injecting the real current time](assets/demo.gif)
+
 ---
 
 ## The problem
